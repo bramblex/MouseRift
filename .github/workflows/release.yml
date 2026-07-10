@@ -1,0 +1,72 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: Existing version tag to release
+        required: true
+        type: string
+
+permissions:
+  contents: write
+
+jobs:
+  release:
+    runs-on: macos-15
+    env:
+      TAG: ${{ inputs.tag || github.ref_name }}
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ inputs.tag || github.ref_name }}
+          submodules: recursive
+          fetch-depth: 0
+
+      - name: Fetch upstream version tags
+        run: >-
+          git -c fetch.recurseSubmodules=false fetch
+          https://github.com/pilotmoon/Scroll-Reverser.git --tags
+
+      - name: Build release
+        run: |
+          VERSION="${TAG#v}"
+          xcodebuild -quiet \
+            -project MouseRift.xcodeproj \
+            -scheme MouseRift \
+            -configuration Release \
+            -destination 'platform=macOS,arch=arm64' \
+            -derivedDataPath "$RUNNER_TEMP/MouseRift-derived" \
+            CODE_SIGNING_ALLOWED=NO \
+            ONLY_ACTIVE_ARCH=YES \
+            BUILDSCRIPTS_VERSION_STRING="$VERSION" \
+            BUILDSCRIPTS_ORIGINAL_VERSION_STRING="$VERSION" \
+            BUILDSCRIPTS_RELEASE_CHANNEL=Production \
+            build
+
+      - name: Sign and package
+        run: |
+          APP="$RUNNER_TEMP/MouseRift-derived/Build/Products/Release/MouseRift.app"
+          ZIP="$RUNNER_TEMP/MouseRift-${TAG}-macOS-arm64.zip"
+          codesign --force --deep --sign - "$APP"
+          codesign --verify --deep --strict --verbose=2 "$APP"
+          ditto -c -k --sequesterRsrc --keepParent "$APP" "$ZIP"
+          shasum -a 256 "$ZIP"
+
+      - name: Publish GitHub release
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          ZIP="$RUNNER_TEMP/MouseRift-${TAG}-macOS-arm64.zip"
+          NOTES="First MouseRift release. Reverse an external mouse wheel without changing trackpad scrolling, and use configurable middle-button swipe gestures. Requires macOS 13.5 or later. This Apple Silicon build is ad-hoc signed and not notarized."
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            gh release upload "$TAG" "$ZIP" --clobber
+          else
+            gh release create "$TAG" "$ZIP" \
+              --title "MouseRift $TAG" \
+              --notes "$NOTES" \
+              --latest
+          fi

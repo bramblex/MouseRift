@@ -36,6 +36,10 @@ and CI builds use an ad-hoc signature for the embedded Sparkle framework.
 
 The current project requires macOS 13.5 or later.
 
+Tagged releases are built for Apple Silicon by GitHub Actions and published as
+ad-hoc-signed zip archives. They are not notarized, so macOS may require the
+first launch to be confirmed from Finder or System Settings.
+
 ## Permissions
 
 MouseRift requires both permissions below:
