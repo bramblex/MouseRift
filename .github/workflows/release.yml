@@ -61,7 +61,7 @@ jobs:
           GH_TOKEN: ${{ github.token }}
         run: |
           ZIP="$RUNNER_TEMP/MouseRift-${TAG}-macOS-arm64.zip"
-          NOTES="First MouseRift release. Reverse an external mouse wheel without changing trackpad scrolling, and use configurable middle-button swipe gestures. Requires macOS 13.5 or later. This Apple Silicon build is ad-hoc signed and not notarized."
+          NOTES="MouseRift ${TAG} for Apple Silicon. Reverse an external mouse wheel without changing trackpad scrolling, and use configurable middle-button swipe gestures. Requires macOS 13.5 or later. This build is ad-hoc signed and not notarized."
           if gh release view "$TAG" >/dev/null 2>&1; then
             gh release upload "$TAG" "$ZIP" --clobber
           else
