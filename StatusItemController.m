@@ -1,6 +1,6 @@
 // This file is part of Scroll Reverser <https://pilotmoon.com/scrollreverser/>
 // Licensed under Apache License v2.0 <http://www.apache.org/licenses/LICENSE-2.0>
-// Modified for MouseRift in 2026: replaced the trademarked status icon.
+// Modified for MouseRift in 2026: use the MouseRift template status icon.
 
 #import "StatusItemController.h"
 
@@ -17,28 +17,15 @@
     return NSMakeSize(14, 17);
 }
 
-+ (NSImage *)statusImageWithColor:(NSColor *)color
++ (NSImage *)statusImage
 {
-    NSImage *const templateImage=[NSImage imageWithSystemSymbolName:@"computermouse" accessibilityDescription:@"MouseRift"];
-    
-    // create blank image to draw into
-    NSImage *const statusImage=[[NSImage alloc] init];
+    NSImage *statusImage=[NSImage imageNamed:@"StatusIcon"];
+    if (!statusImage) {
+        statusImage=[NSImage imageWithSystemSymbolName:@"computermouse"
+                              accessibilityDescription:@"MouseRift"];
+    }
     [statusImage setSize:[self statusImageSize]];
-    [statusImage lockFocus];
-    
-    // draw base black image
-    const NSRect dstRect=NSMakeRect(0, 0, [self statusImageSize].width, [self statusImageSize].height);
-    [templateImage drawInRect:dstRect
-                     fromRect:NSZeroRect
-                    operation:NSCompositingOperationSourceOver
-                     fraction:1.0];
-    
-    // fill with color
-    [color set];
-    NSRectFillUsingOperation(dstRect, NSCompositingOperationSourceIn);
-    
-    // finished drawing
-    [statusImage unlockFocus];
+    [statusImage setTemplate:YES];
     return statusImage;
 }
 
@@ -55,9 +42,7 @@
         self.statusItem.button.action=@selector(statusButtonClicked:);
         [self.statusItem.button sendActionOn:NSEventMaskLeftMouseDown|NSEventMaskRightMouseDown];
 
-        NSImage *const statusImage=[StatusItemController statusImageWithColor:[NSColor blackColor]];
-        [statusImage setTemplate:YES];
-        self.statusItem.button.image=statusImage;
+        self.statusItem.button.image=[StatusItemController statusImage];
     }
 }
 

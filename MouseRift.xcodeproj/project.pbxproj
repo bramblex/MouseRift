@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		B10000000000000000000001 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B10000000000000000000002 /* Assets.xcassets */; };
 		01145CF2256ED29000E0EFE5 /* LauncherController.m in Sources */ = {isa = PBXBuildFile; fileRef = 01145CF1256ED29000E0EFE5 /* LauncherController.m */; };
 		01145CF6256ED93400E0EFE5 /* ServiceManagement.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 01145CF5256ED93400E0EFE5 /* ServiceManagement.framework */; };
 		011A628B19D4A748003CE6DC /* IntroShot.png in Resources */ = {isa = PBXBuildFile; fileRef = 011A628919D4A748003CE6DC /* IntroShot.png */; };
@@ -51,6 +52,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		B10000000000000000000002 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		01145CF0256ED29000E0EFE5 /* LauncherController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = LauncherController.h; sourceTree = "<group>"; };
 		01145CF1256ED29000E0EFE5 /* LauncherController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = LauncherController.m; sourceTree = "<group>"; };
 		01145CF5256ED93400E0EFE5 /* ServiceManagement.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ServiceManagement.framework; path = System/Library/Frameworks/ServiceManagement.framework; sourceTree = SDKROOT; };
@@ -254,6 +256,7 @@
 		29B97317FDCFA39411CA2CEA /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				B10000000000000000000002 /* Assets.xcassets */,
 				01B5ABC91700D25700FF6F6A /* Graphics */,
 				011A628619D49B69003CE6DC /* ReleaseNotes.md */,
 				01AF54D21B0E11150028A26A /* TestWindow.xib */,
@@ -360,6 +363,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				B10000000000000000000001 /* Assets.xcassets in Resources */,
 				01AF54D41B0E11150028A26A /* TestWindow.xib in Resources */,
 				01587308134DD1E200CD9CC4 /* Localizable.strings in Resources */,
 				011A628B19D4A748003CE6DC /* IntroShot.png in Resources */,
@@ -457,6 +461,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 015D94B02571810B00A685C8 /* Development.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application";
@@ -495,6 +500,7 @@
 			isa = XCBuildConfiguration;
 			baseConfigurationReference = 01F580282571848F00BACC0F /* Production.xcconfig */;
 			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				CLANG_ENABLE_OBJC_ARC = YES;
 				CODE_SIGN_IDENTITY = "Developer ID Application";

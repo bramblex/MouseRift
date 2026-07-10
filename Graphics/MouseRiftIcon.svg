@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg xmlns="http://www.w3.org/2000/svg" width="1024" height="1024" viewBox="0 0 1024 1024">
+  <defs>
+    <clipPath id="mouse-body">
+      <rect x="322" y="196" width="380" height="632" rx="190"/>
+    </clipPath>
+  </defs>
+
+  <rect x="48" y="48" width="928" height="928" rx="216" fill="#1C1C1E"/>
+
+  <rect x="322" y="196" width="380" height="632" rx="190"
+        fill="none" stroke="#F5F5F7" stroke-width="44"/>
+  <path d="M512 198 V294" fill="none" stroke="#F5F5F7" stroke-width="34"
+        stroke-linecap="round"/>
+  <rect x="486" y="260" width="52" height="112" rx="26" fill="#F5F5F7"/>
+
+  <g clip-path="url(#mouse-body)">
+    <path d="M300 748 L724 324" fill="none" stroke="#1C1C1E" stroke-width="76"
+          stroke-linecap="round"/>
+    <path d="M300 748 L724 324" fill="none" stroke="#7D7AFF" stroke-width="22"
+          stroke-linecap="round"/>
+  </g>
+</svg>
