@@ -108,3 +108,12 @@ Please note %1$@ is a variable. It is replaced with either `Input Monitoring` or
 
 /* No comment provided by engineer. */
 "✅ granted" = "प्रदान गरिएको छ";
+
+/* MouseRift additions */
+"MouseRift is now running!" = "MouseRift अहिले चलिरहेको छ!";
+"Middle-button gestures" = "मध्य बटन इशाराहरू";
+"Enable middle-button swipes" = "मध्य बटन स्वाइपहरू सक्षम गर्नुहोस्";
+"Gesture threshold" = "इशारा सीमा";
+"Invert vertical gesture direction" = "ठाडो इशाराको दिशा उल्टाउनुहोस्";
+"MouseRift needs Accessibility permission to modify scrolling and middle-button gestures." = "स्क्रोलिङ र मध्य बटन इशाराहरू परिवर्तन गर्न MouseRift लाई पहुँच अनुमति चाहिन्छ।";
+"MouseRift needs Input Monitoring permission to distinguish trackpad gestures from mouse scrolling." = "ट्र्याकप्याड इशारा र माउस स्क्रोलिङ छुट्याउन MouseRift लाई इनपुट अनुगमन अनुमति चाहिन्छ।";

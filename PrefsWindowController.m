@@ -398,6 +398,22 @@ static const double _multiplier=25.0;
     return NSLocalizedString(@"Reverse Mouse", @"Prefs check box");
 }
 
+- (NSString *)menuStringMiddleGesturesHeader {
+    return NSLocalizedString(@"Middle-button gestures", @"Prefs section title");
+}
+
+- (NSString *)menuStringEnableMiddleGestures {
+    return NSLocalizedString(@"Enable middle-button swipes", @"Prefs check box");
+}
+
+- (NSString *)menuStringMiddleGestureThreshold {
+    return NSLocalizedString(@"Gesture threshold", @"Prefs slider label");
+}
+
+- (NSString *)menuStringInvertMiddleGestureY {
+    return NSLocalizedString(@"Invert vertical gesture direction", @"Prefs check box");
+}
+
 - (NSString *)menuStringStartAtLogin {
     return NSLocalizedString(@"Start at login", @"Prefs check box");
 }

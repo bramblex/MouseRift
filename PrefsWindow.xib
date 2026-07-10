@@ -182,6 +182,7 @@
                                             <font key="font" metaFont="system"/>
                                         </buttonCell>
                                         <connections>
+                                            <binding destination="-2" name="title" keyPath="self.menuStringEnableMiddleGestures" id="MRG-enable-title-binding-001"/>
                                             <binding destination="9eJ-Lx-koC" name="value" keyPath="values.MiddleGestures" id="MRG-enable-binding-001"/>
                                         </connections>
                                     </button>
@@ -192,6 +193,9 @@
                                             <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
                                             <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
                                         </textFieldCell>
+                                        <connections>
+                                            <binding destination="-2" name="value" keyPath="self.menuStringMiddleGestureThreshold" id="MRG-threshold-title-binding-001"/>
+                                        </connections>
                                     </textField>
                                     <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MRG-threshold-slider-001">
                                         <rect key="frame" x="149" y="25" width="253" height="24"/>
@@ -209,6 +213,7 @@
                                         </buttonCell>
                                         <connections>
                                             <binding destination="9eJ-Lx-koC" name="enabled" keyPath="values.MiddleGestures" id="MRG-invert-enabled-001"/>
+                                            <binding destination="-2" name="title" keyPath="self.menuStringInvertMiddleGestureY" id="MRG-invert-title-binding-001"/>
                                             <binding destination="9eJ-Lx-koC" name="value" keyPath="values.InvertMiddleGestureY" id="MRG-invert-value-001"/>
                                         </connections>
                                     </button>
@@ -226,6 +231,9 @@
                                     <constraint firstAttribute="bottom" secondItem="MRG-invert-001" secondAttribute="bottom" constant="10" id="MRG-c10"/>
                                 </constraints>
                             </view>
+                            <connections>
+                                <binding destination="-2" name="title" keyPath="self.menuStringMiddleGesturesHeader" id="MRG-header-title-binding-001"/>
+                            </connections>
                         </box>
                         <box title="DISCRETE SCROLL" translatesAutoresizingMaskIntoConstraints="NO" id="rKG-9G-Xv9" userLabel="Scroll Wheel Box">
                             <rect key="frame" x="-3" y="193" width="424" height="80"/>

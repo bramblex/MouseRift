@@ -108,3 +108,12 @@ Please note %1$@ is a variable. It is replaced with either `Input Monitoring` or
 
 /* No comment provided by engineer. */
 "✅ granted" = "✅ đã cho phép";
+
+/* MouseRift additions */
+"MouseRift is now running!" = "MouseRift đang chạy!";
+"Middle-button gestures" = "Cử chỉ nút giữa";
+"Enable middle-button swipes" = "Bật thao tác vuốt bằng nút giữa";
+"Gesture threshold" = "Ngưỡng cử chỉ";
+"Invert vertical gesture direction" = "Đảo hướng cử chỉ dọc";
+"MouseRift needs Accessibility permission to modify scrolling and middle-button gestures." = "MouseRift cần quyền Trợ năng để thay đổi thao tác cuộn và cử chỉ nút giữa.";
+"MouseRift needs Input Monitoring permission to distinguish trackpad gestures from mouse scrolling." = "MouseRift cần quyền Giám sát đầu vào để phân biệt cử chỉ bàn di chuột với thao tác cuộn chuột.";

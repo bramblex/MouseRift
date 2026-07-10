@@ -108,3 +108,12 @@ Please note %1$@ is a variable. It is replaced with either `Input Monitoring` or
 
 /* No comment provided by engineer. */
 "✅ granted" = "✅已授權";
+
+/* MouseRift additions */
+"MouseRift is now running!" = "MouseRift 正在執行！";
+"Middle-button gestures" = "中鍵手勢";
+"Enable middle-button swipes" = "啟用中鍵滑動";
+"Gesture threshold" = "手勢觸發門檻";
+"Invert vertical gesture direction" = "反轉垂直手勢方向";
+"MouseRift needs Accessibility permission to modify scrolling and middle-button gestures." = "MouseRift 需要「輔助使用」權限才能修改捲動和中鍵手勢。";
+"MouseRift needs Input Monitoring permission to distinguish trackpad gestures from mouse scrolling." = "MouseRift 需要「輸入監控」權限，以區分觸控式軌跡板手勢和滑鼠捲動。";

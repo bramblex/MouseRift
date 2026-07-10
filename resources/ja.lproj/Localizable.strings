@@ -109,3 +109,12 @@ Please note %1$@ is a variable. It is replaced with either `Input Monitoring` or
 
 /* No comment provided by engineer. */
 "✅ granted" = "許可する";
+
+/* MouseRift additions */
+"MouseRift is now running!" = "MouseRift は現在動作中です！";
+"Middle-button gestures" = "中央ボタンジェスチャ";
+"Enable middle-button swipes" = "中央ボタンのスワイプを有効にする";
+"Gesture threshold" = "ジェスチャのしきい値";
+"Invert vertical gesture direction" = "垂直ジェスチャの方向を反転";
+"MouseRift needs Accessibility permission to modify scrolling and middle-button gestures." = "MouseRift がスクロールと中央ボタンジェスチャを変更するには、アクセシビリティの許可が必要です。";
+"MouseRift needs Input Monitoring permission to distinguish trackpad gestures from mouse scrolling." = "MouseRift がトラックパッドのジェスチャとマウスのスクロールを区別するには、入力監視の許可が必要です。";

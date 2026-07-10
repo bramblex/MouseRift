@@ -108,3 +108,12 @@ Please note %1$@ is a variable. It is replaced with either `Input Monitoring` or
 
 /* No comment provided by engineer. */
 "✅ granted" = "✅ εγκρίθηκε";
+
+/* MouseRift additions */
+"MouseRift is now running!" = "Το MouseRift εκτελείται!";
+"Middle-button gestures" = "Χειρονομίες μεσαίου κουμπιού";
+"Enable middle-button swipes" = "Ενεργοποίηση σαρώσεων με το μεσαίο κουμπί";
+"Gesture threshold" = "Όριο χειρονομίας";
+"Invert vertical gesture direction" = "Αντιστροφή κατακόρυφης κατεύθυνσης χειρονομίας";
+"MouseRift needs Accessibility permission to modify scrolling and middle-button gestures." = "Το MouseRift χρειάζεται άδεια Προσβασιμότητας για να τροποποιεί την κύλιση και τις χειρονομίες του μεσαίου κουμπιού.";
+"MouseRift needs Input Monitoring permission to distinguish trackpad gestures from mouse scrolling." = "Το MouseRift χρειάζεται άδεια Παρακολούθησης εισόδου για να διακρίνει τις χειρονομίες του trackpad από την κύλιση του ποντικιού.";

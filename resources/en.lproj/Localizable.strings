@@ -99,3 +99,11 @@
 /* No comment provided by engineer. */
 "✅ granted" = "✅ granted";
 
+/* MouseRift additions */
+"MouseRift is now running!" = "MouseRift is now running!";
+"Middle-button gestures" = "Middle-button gestures";
+"Enable middle-button swipes" = "Enable middle-button swipes";
+"Gesture threshold" = "Gesture threshold";
+"Invert vertical gesture direction" = "Invert vertical gesture direction";
+"MouseRift needs Accessibility permission to modify scrolling and middle-button gestures." = "MouseRift needs Accessibility permission to modify scrolling and middle-button gestures.";
+"MouseRift needs Input Monitoring permission to distinguish trackpad gestures from mouse scrolling." = "MouseRift needs Input Monitoring permission to distinguish trackpad gestures from mouse scrolling.";

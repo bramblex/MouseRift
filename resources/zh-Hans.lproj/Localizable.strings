@@ -5,7 +5,7 @@ for example: `Accessibility permission: ⛔️ required` */
 "%1$@ permission: %2$@" = "%1$@ 权限： %2$@";
 
 /* corresponds to Accessibility in system Privacy settings */
-"Accessibility" = "可访问性";
+"Accessibility" = "辅助功能";
 
 /* Preferences pane for `App` settings */
 "App" = "软件";
@@ -29,7 +29,7 @@ for example: `Accessibility permission: ⛔️ required` */
 "Include beta versions" = "允许测试版更新";
 
 /* corresponds to Input Monitoring in system Privacy settings */
-"Input Monitoring" = "输入监测";
+"Input Monitoring" = "输入监控";
 
 /* Large step size */
 "Large" = "较大";
@@ -108,3 +108,12 @@ Please note %1$@ is a variable. It is replaced with either `Input Monitoring` or
 
 /* No comment provided by engineer. */
 "✅ granted" = "✅  已允许";
+
+/* MouseRift additions */
+"MouseRift is now running!" = "MouseRift 正在运行！";
+"Middle-button gestures" = "中键手势";
+"Enable middle-button swipes" = "启用中键滑动";
+"Gesture threshold" = "手势触发阈值";
+"Invert vertical gesture direction" = "反转垂直手势方向";
+"MouseRift needs Accessibility permission to modify scrolling and middle-button gestures." = "MouseRift 需要“辅助功能”权限才能修改滚动和中键手势。";
+"MouseRift needs Input Monitoring permission to distinguish trackpad gestures from mouse scrolling." = "MouseRift 需要“输入监控”权限，以区分触控板手势和鼠标滚动。";

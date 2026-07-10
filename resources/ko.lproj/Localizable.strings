@@ -108,3 +108,12 @@ Please note %1$@ is a variable. It is replaced with either `Input Monitoring` or
 
 /* No comment provided by engineer. */
 "✅ granted" = "✅ 권한 허용됨";
+
+/* MouseRift additions */
+"MouseRift is now running!" = "MouseRift가 실행 중입니다!";
+"Middle-button gestures" = "가운데 버튼 제스처";
+"Enable middle-button swipes" = "가운데 버튼 스와이프 활성화";
+"Gesture threshold" = "제스처 임계값";
+"Invert vertical gesture direction" = "세로 제스처 방향 반전";
+"MouseRift needs Accessibility permission to modify scrolling and middle-button gestures." = "MouseRift가 스크롤과 가운데 버튼 제스처를 변경하려면 손쉬운 사용 권한이 필요합니다.";
+"MouseRift needs Input Monitoring permission to distinguish trackpad gestures from mouse scrolling." = "MouseRift가 트랙패드 제스처와 마우스 스크롤을 구분하려면 입력 모니터링 권한이 필요합니다.";

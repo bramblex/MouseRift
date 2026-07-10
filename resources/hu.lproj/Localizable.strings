@@ -108,3 +108,12 @@ Please note %1$@ is a variable. It is replaced with either `Input Monitoring` or
 
 /* No comment provided by engineer. */
 "✅ granted" = "✅ megadva";
+
+/* MouseRift additions */
+"MouseRift is now running!" = "A MouseRift fut!";
+"Middle-button gestures" = "Középső gombos gesztusok";
+"Enable middle-button swipes" = "Középső gombos húzások engedélyezése";
+"Gesture threshold" = "Gesztusküszöb";
+"Invert vertical gesture direction" = "Függőleges gesztusirány megfordítása";
+"MouseRift needs Accessibility permission to modify scrolling and middle-button gestures." = "A MouseRiftnek Kisegítő lehetőségek engedélyre van szüksége a görgetés és a középső gombos gesztusok módosításához.";
+"MouseRift needs Input Monitoring permission to distinguish trackpad gestures from mouse scrolling." = "A MouseRiftnek Bemenetfigyelés engedélyre van szüksége a trackpadgesztusok és az egérgörgetés megkülönböztetéséhez.";

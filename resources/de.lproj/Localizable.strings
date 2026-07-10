@@ -108,3 +108,12 @@ Please note %1$@ is a variable. It is replaced with either `Input Monitoring` or
 
 /* No comment provided by engineer. */
 "✅ granted" = "✅ gewährt";
+
+/* MouseRift additions */
+"MouseRift is now running!" = "MouseRift läuft jetzt!";
+"Middle-button gestures" = "Mitteltasten-Gesten";
+"Enable middle-button swipes" = "Wischgesten mit der Mitteltaste aktivieren";
+"Gesture threshold" = "Gestenschwelle";
+"Invert vertical gesture direction" = "Vertikale Gestenrichtung umkehren";
+"MouseRift needs Accessibility permission to modify scrolling and middle-button gestures." = "MouseRift benötigt die Bedienungshilfen-Berechtigung, um Scrollen und Mitteltasten-Gesten zu ändern.";
+"MouseRift needs Input Monitoring permission to distinguish trackpad gestures from mouse scrolling." = "MouseRift benötigt die Eingabeüberwachungs-Berechtigung, um Trackpad-Gesten von Maus-Scrollen zu unterscheiden.";

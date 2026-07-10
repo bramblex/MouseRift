@@ -108,3 +108,12 @@ Please note %1$@ is a variable. It is replaced with either `Input Monitoring` or
 
 /* No comment provided by engineer. */
 "✅ granted" = "✅ дозволено";
+
+/* MouseRift additions */
+"MouseRift is now running!" = "MouseRift запущено!";
+"Middle-button gestures" = "Жести середньої кнопки";
+"Enable middle-button swipes" = "Увімкнути свайпи середньою кнопкою";
+"Gesture threshold" = "Поріг жесту";
+"Invert vertical gesture direction" = "Інвертувати вертикальний напрямок жесту";
+"MouseRift needs Accessibility permission to modify scrolling and middle-button gestures." = "MouseRift потрібен доступ до Спеціальних можливостей для зміни прокрутки та жестів середньої кнопки.";
+"MouseRift needs Input Monitoring permission to distinguish trackpad gestures from mouse scrolling." = "MouseRift потрібен доступ до Моніторингу введення, щоб відрізняти жести трекпада від прокрутки миші.";
