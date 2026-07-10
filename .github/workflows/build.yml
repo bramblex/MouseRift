@@ -13,7 +13,7 @@ jobs:
           submodules: recursive
       - name: Build MouseRift
         run: >-
-          xcodebuild
+          mkdir -p log && xcodebuild
           -project MouseRift.xcodeproj
           -scheme MouseRift
           -configuration Development
