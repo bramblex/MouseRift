@@ -1,11 +1,13 @@
 // This file is part of Scroll Reverser <https://pilotmoon.com/scrollreverser/>
 // Licensed under Apache License v2.0 <http://www.apache.org/licenses/LICENSE-2.0>
+// Modified for MouseRift in 2026: added middle-button swipe gestures.
 
 #import "MouseTap.h"
 #import "CoreFoundation/CoreFoundation.h"
 #import "TapLogger.h"
 #import "AppDelegate.h"
 #import <mach/mach_time.h>
+#import <Carbon/Carbon.h>
 
 static BOOL _preventReverseOtherApp;
 
@@ -49,6 +51,91 @@ static NSInteger _stepsize(void)
     if (setting<0) return 0;
     if (setting>100) return 100;
     return setting;
+}
+
+typedef enum {
+    MiddleGestureNone=0,
+    MiddleGestureLeft,
+    MiddleGestureRight,
+    MiddleGestureUp,
+    MiddleGestureDown,
+} MiddleGestureDirection;
+
+static void _postShortcut(CGKeyCode keyCode, CGEventFlags flags)
+{
+    CGEventSourceRef const source=CGEventSourceCreate(kCGEventSourceStateHIDSystemState);
+    if (!source) return;
+
+    CGEventRef const keyDown=CGEventCreateKeyboardEvent(source, keyCode, true);
+    CGEventRef const keyUp=CGEventCreateKeyboardEvent(source, keyCode, false);
+    if (keyDown&&keyUp) {
+        CGEventSetFlags(keyDown, flags);
+        CGEventSetFlags(keyUp, flags);
+        CGEventPost(kCGHIDEventTap, keyDown);
+        CGEventPost(kCGHIDEventTap, keyUp);
+    }
+    if (keyDown) CFRelease(keyDown);
+    if (keyUp) CFRelease(keyUp);
+    CFRelease(source);
+}
+
+static void _performMiddleGesture(MiddleGestureDirection direction)
+{
+    switch (direction) {
+        case MiddleGestureLeft:
+            _postShortcut(kVK_LeftArrow, kCGEventFlagMaskControl|kCGEventFlagMaskSecondaryFn);
+            break;
+        case MiddleGestureRight:
+            _postShortcut(kVK_RightArrow, kCGEventFlagMaskControl|kCGEventFlagMaskSecondaryFn);
+            break;
+        case MiddleGestureUp:
+            dispatch_async(dispatch_get_main_queue(), ^{
+                [[NSWorkspace sharedWorkspace] launchApplication:@"Mission Control"];
+            });
+            break;
+        case MiddleGestureDown:
+            _postShortcut(kVK_F11, kCGEventFlagMaskSecondaryFn);
+            break;
+        case MiddleGestureNone:
+            break;
+    }
+}
+
+static MiddleGestureDirection _recognizedMiddleGesture(MouseTap *tap)
+{
+    const double threshold=MAX(1, [[NSUserDefaults standardUserDefaults] doubleForKey:PrefsMiddleGestureThreshold]);
+    const double dy=[[NSUserDefaults standardUserDefaults] boolForKey:PrefsInvertMiddleGestureY]
+        ? -tap->accumulatedMiddleDY
+        : tap->accumulatedMiddleDY;
+
+    if (fabs(tap->accumulatedMiddleDX)>=fabs(tap->accumulatedMiddleDY)) {
+        if (tap->accumulatedMiddleDX < -threshold) return MiddleGestureLeft;
+        if (tap->accumulatedMiddleDX > threshold) return MiddleGestureRight;
+    }
+    else {
+        if (dy < -threshold) return MiddleGestureUp;
+        if (dy > threshold) return MiddleGestureDown;
+    }
+    return MiddleGestureNone;
+}
+
+static void _postMiddleClick(MouseTap *tap, CGPoint location)
+{
+    CGEventSourceRef const source=CGEventSourceCreate(kCGEventSourceStateHIDSystemState);
+    if (!source) return;
+
+    CGEventRef const mouseDown=CGEventCreateMouseEvent(source, kCGEventOtherMouseDown, location, kCGMouseButtonCenter);
+    CGEventRef const mouseUp=CGEventCreateMouseEvent(source, kCGEventOtherMouseUp, location, kCGMouseButtonCenter);
+    if (mouseDown&&mouseUp) {
+        tap->ignoredSyntheticMiddleEvents+=2;
+        CGEventSetIntegerValueField(mouseDown, kCGMouseEventButtonNumber, 2);
+        CGEventSetIntegerValueField(mouseUp, kCGMouseEventButtonNumber, 2);
+        CGEventPost(kCGHIDEventTap, mouseDown);
+        CGEventPost(kCGHIDEventTap, mouseUp);
+    }
+    if (mouseDown) CFRelease(mouseDown);
+    if (mouseUp) CFRelease(mouseUp);
+    CFRelease(source);
 }
 
 static CGEventRef _callback(CGEventTapProxy proxy,
@@ -233,6 +320,50 @@ static CGEventRef _callback(CGEventTapProxy proxy,
                 CFRelease(ioHidEventRef);
             }
         }
+        else if (type==kCGEventOtherMouseDown||type==kCGEventOtherMouseDragged||type==kCGEventOtherMouseUp)
+        {
+            const int64_t button=CGEventGetIntegerValueField(eventRef, kCGMouseEventButtonNumber);
+            if (button!=2||![[NSUserDefaults standardUserDefaults] boolForKey:PrefsMiddleGestures]) {
+                return eventRef;
+            }
+
+            if (tap->ignoredSyntheticMiddleEvents>0) {
+                tap->ignoredSyntheticMiddleEvents--;
+                return eventRef;
+            }
+
+            switch (type) {
+                case kCGEventOtherMouseDown:
+                    tap->trackingMiddleButton=YES;
+                    tap->accumulatedMiddleDX=0;
+                    tap->accumulatedMiddleDY=0;
+                    break;
+                case kCGEventOtherMouseDragged:
+                    if (tap->trackingMiddleButton) {
+                        tap->accumulatedMiddleDX+=CGEventGetDoubleValueField(eventRef, kCGMouseEventDeltaX);
+                        tap->accumulatedMiddleDY+=CGEventGetDoubleValueField(eventRef, kCGMouseEventDeltaY);
+                    }
+                    break;
+                case kCGEventOtherMouseUp:
+                    if (tap->trackingMiddleButton) {
+                        tap->trackingMiddleButton=NO;
+                        const MiddleGestureDirection direction=_recognizedMiddleGesture(tap);
+                        if (direction==MiddleGestureNone) {
+                            _postMiddleClick(tap, CGEventGetLocation(eventRef));
+                        }
+                        else {
+                            _performMiddleGesture(direction);
+                        }
+                    }
+                    break;
+                default:
+                    break;
+            }
+
+            [tap->logger logEventType:type forKey:@"type"];
+            [tap->logger logParams];
+            return NULL;
+        }
         else
         {
             [tap enableTap];
@@ -283,6 +414,10 @@ static CGEventRef _callback(CGEventTapProxy proxy,
     touching=0;
     lastTouchTime=0;
     lastSource=0;
+    trackingMiddleButton=NO;
+    accumulatedMiddleDX=0;
+    accumulatedMiddleDY=0;
+    ignoredSyntheticMiddleEvents=0;
     
     /* We use a separate passive tap to monitor gesture events, because using an
      active tap to do so causes various problems:
@@ -302,7 +437,7 @@ static CGEventRef _callback(CGEventTapProxy proxy,
     self.activeTapPort=(CFMachPortRef)CGEventTapCreate(kCGSessionEventTap,
                                            kCGTailAppendEventTap,
                                            kCGEventTapOptionDefault,
-                                           NSEventMaskScrollWheel,
+                                           NSEventMaskScrollWheel|NSEventMaskOtherMouseDown|NSEventMaskOtherMouseDragged|NSEventMaskOtherMouseUp,
                                            _callback,
                                            (__bridge void *)(self));
     NSLog(@"active tap port %p", self.activeTapPort);

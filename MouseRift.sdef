@@ -11,8 +11,8 @@
     
     
     <!-- our special scripting suite -->
-    <suite name="Scroll Reverser Suite" code="SRSR"
-        description="Scroll Reverser application specific scripting facilities.">
+    <suite name="MouseRift Suite" code="SRSR"
+        description="MouseRift application specific scripting facilities.">
         
         
         <!-- any additions to the application class are done here.  note that
@@ -20,13 +20,13 @@
          application class definition, and we use the same four character code from
          that definition (see the application class definition above).  -->
         <class name="application" code="capp"
-            description="Scroll Reverser application." inherits="application">
+            description="MouseRift application." inherits="application">
             
             <!-- the name of the Cocoa class where we have provided the
              various accessor methods for our application class.  -->
             <cocoa class="NSApplication"/>
             
-            <property name="enabled" code="SRen" type="boolean" description="Set whether Scroll Reverser is on or off."/>
+            <property name="enabled" code="SRen" type="boolean" description="Set whether MouseRift is on or off."/>
         </class>
 
         

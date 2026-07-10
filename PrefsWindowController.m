@@ -1,5 +1,6 @@
 // This file is part of Scroll Reverser <https://pilotmoon.com/scrollreverser/>
 // Licensed under Apache License v2.0 <http://www.apache.org/licenses/LICENSE-2.0>
+// Modified for MouseRift in 2026: updated product and permission copy.
 
 #import "PrefsWindowController.h"
 #import "AppDelegate.h"
@@ -422,11 +423,11 @@ static const double _multiplier=25.0;
 }
 
 - (NSString *)menuStringPermissionsAXDescription {
-    return NSLocalizedString(@"Scroll Reverser needs Accessibility permission to modify your scrolling.", nil);
+    return NSLocalizedString(@"MouseRift needs Accessibility permission to modify scrolling and middle-button gestures.", nil);
 }
 
 - (NSString *)menuStringPermissionsIMDescription {
-    return NSLocalizedString(@"Scroll Reverser needs Input Monitoring permission to detect whether your fingers are touching the trackpad.", nil);
+    return NSLocalizedString(@"MouseRift needs Input Monitoring permission to distinguish trackpad gestures from mouse scrolling.", nil);
 }
 
 - (NSString *)menuStringPermissionsAX {

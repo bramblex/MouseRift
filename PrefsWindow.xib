@@ -181,6 +181,64 @@
                                 </binding>
                             </connections>
                         </stackView>
+                        <box title="MIDDLE-BUTTON GESTURES" translatesAutoresizingMaskIntoConstraints="NO" id="MRG-box-001" userLabel="Middle Gestures Box">
+                            <rect key="frame" x="-3" y="193" width="424" height="104"/>
+                            <view key="contentView" id="MRG-view-001">
+                                <rect key="frame" x="4" y="5" width="416" height="84"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                <subviews>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="MRG-enable-001">
+                                        <rect key="frame" x="11" y="58" width="164" height="16"/>
+                                        <buttonCell key="cell" type="check" title="Enable middle-button swipes" bezelStyle="regularSquare" imagePosition="left" state="on" inset="2" id="MRG-enable-cell-001">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <binding destination="9eJ-Lx-koC" name="value" keyPath="values.MiddleGestures" id="MRG-enable-binding-001"/>
+                                        </connections>
+                                    </button>
+                                    <textField focusRingType="none" translatesAutoresizingMaskIntoConstraints="NO" id="MRG-threshold-label-001">
+                                        <rect key="frame" x="13" y="31" width="128" height="16"/>
+                                        <textFieldCell key="cell" lineBreakMode="clipping" title="Gesture threshold" id="MRG-threshold-label-cell-001">
+                                            <font key="font" metaFont="system"/>
+                                            <color key="textColor" name="labelColor" catalog="System" colorSpace="catalog"/>
+                                            <color key="backgroundColor" name="textBackgroundColor" catalog="System" colorSpace="catalog"/>
+                                        </textFieldCell>
+                                    </textField>
+                                    <slider verticalHuggingPriority="750" translatesAutoresizingMaskIntoConstraints="NO" id="MRG-threshold-slider-001">
+                                        <rect key="frame" x="149" y="25" width="253" height="24"/>
+                                        <sliderCell key="cell" state="on" alignment="left" minValue="20" maxValue="200" doubleValue="80" sliderType="linear" id="MRG-threshold-slider-cell-001"/>
+                                        <connections>
+                                            <binding destination="9eJ-Lx-koC" name="enabled" keyPath="values.MiddleGestures" id="MRG-threshold-enabled-001"/>
+                                            <binding destination="9eJ-Lx-koC" name="value" keyPath="values.MiddleGestureThreshold" id="MRG-threshold-value-001"/>
+                                        </connections>
+                                    </slider>
+                                    <button translatesAutoresizingMaskIntoConstraints="NO" id="MRG-invert-001">
+                                        <rect key="frame" x="11" y="8" width="180" height="16"/>
+                                        <buttonCell key="cell" type="check" title="Invert vertical gesture direction" bezelStyle="regularSquare" imagePosition="left" inset="2" id="MRG-invert-cell-001">
+                                            <behavior key="behavior" changeContents="YES" doesNotDimImage="YES" lightByContents="YES"/>
+                                            <font key="font" metaFont="system"/>
+                                        </buttonCell>
+                                        <connections>
+                                            <binding destination="9eJ-Lx-koC" name="enabled" keyPath="values.MiddleGestures" id="MRG-invert-enabled-001"/>
+                                            <binding destination="9eJ-Lx-koC" name="value" keyPath="values.InvertMiddleGestureY" id="MRG-invert-value-001"/>
+                                        </connections>
+                                    </button>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="MRG-enable-001" firstAttribute="leading" secondItem="MRG-view-001" secondAttribute="leading" constant="14" id="MRG-c1"/>
+                                    <constraint firstItem="MRG-enable-001" firstAttribute="top" secondItem="MRG-view-001" secondAttribute="top" constant="10" id="MRG-c2"/>
+                                    <constraint firstItem="MRG-threshold-label-001" firstAttribute="leading" secondItem="MRG-view-001" secondAttribute="leading" constant="14" id="MRG-c3"/>
+                                    <constraint firstItem="MRG-threshold-label-001" firstAttribute="top" secondItem="MRG-enable-001" secondAttribute="bottom" constant="10" id="MRG-c4"/>
+                                    <constraint firstItem="MRG-threshold-slider-001" firstAttribute="leading" secondItem="MRG-threshold-label-001" secondAttribute="trailing" constant="10" id="MRG-c5"/>
+                                    <constraint firstItem="MRG-threshold-slider-001" firstAttribute="centerY" secondItem="MRG-threshold-label-001" secondAttribute="centerY" id="MRG-c6"/>
+                                    <constraint firstAttribute="trailing" secondItem="MRG-threshold-slider-001" secondAttribute="trailing" constant="14" id="MRG-c7"/>
+                                    <constraint firstItem="MRG-invert-001" firstAttribute="leading" secondItem="MRG-view-001" secondAttribute="leading" constant="14" id="MRG-c8"/>
+                                    <constraint firstItem="MRG-invert-001" firstAttribute="top" secondItem="MRG-threshold-label-001" secondAttribute="bottom" constant="8" id="MRG-c9"/>
+                                    <constraint firstAttribute="bottom" secondItem="MRG-invert-001" secondAttribute="bottom" constant="10" id="MRG-c10"/>
+                                </constraints>
+                            </view>
+                        </box>
                         <box title="DISCRETE SCROLL" translatesAutoresizingMaskIntoConstraints="NO" id="rKG-9G-Xv9" userLabel="Scroll Wheel Box">
                             <rect key="frame" x="-3" y="193" width="424" height="80"/>
                             <view key="contentView" id="XpO-OG-poD">
@@ -427,6 +485,8 @@
                         </box>
                     </subviews>
                     <constraints>
+                        <constraint firstItem="MRG-box-001" firstAttribute="leading" secondItem="7x2-oY-UOa" secondAttribute="leading" id="MRG-stack-leading"/>
+                        <constraint firstAttribute="trailing" secondItem="MRG-box-001" secondAttribute="trailing" id="MRG-stack-trailing"/>
                         <constraint firstItem="rKG-9G-Xv9" firstAttribute="leading" secondItem="7x2-oY-UOa" secondAttribute="leading" id="6XN-5k-2wa"/>
                         <constraint firstAttribute="trailing" secondItem="rKG-9G-Xv9" secondAttribute="trailing" id="86q-iw-fXN"/>
                         <constraint firstItem="X8x-9H-QTO" firstAttribute="centerX" secondItem="7x2-oY-UOa" secondAttribute="centerX" id="Iwf-tG-lvL"/>
@@ -439,8 +499,10 @@
                         <integer value="1000"/>
                         <integer value="1000"/>
                         <integer value="1000"/>
+                        <integer value="1000"/>
                     </visibilityPriorities>
                     <customSpacing>
+                        <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
                         <real value="3.4028234663852886e+38"/>
@@ -583,7 +645,7 @@
                         <real value="3.4028234663852886e+38"/>
                     </customSpacing>
                 </stackView>
-                <stackView distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="750" verticalStackHuggingPriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nFf-j6-cRK" userLabel="Updates Stack View">
+                <stackView hidden="YES" distribution="fill" orientation="horizontal" alignment="top" horizontalStackHuggingPriority="750" verticalStackHuggingPriority="750" detachesHiddenViews="YES" translatesAutoresizingMaskIntoConstraints="NO" id="nFf-j6-cRK" userLabel="Updates Stack View">
                     <rect key="frame" x="96" y="20" width="270" height="35"/>
                     <subviews>
                         <button horizontalHuggingPriority="1000" verticalHuggingPriority="751" translatesAutoresizingMaskIntoConstraints="NO" id="tD5-NU-mBS">

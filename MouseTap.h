@@ -1,5 +1,6 @@
 // This file is part of Scroll Reverser <https://pilotmoon.com/scrollreverser/>
 // Licensed under Apache License v2.0 <http://www.apache.org/licenses/LICENSE-2.0>
+// Modified for MouseRift in 2026: added middle-button swipe state.
 
 #import <Foundation/Foundation.h>
 
@@ -25,6 +26,11 @@ typedef enum {
     NSUInteger touching;
     uint64_t lastTouchTime;
     ScrollEventSource lastSource;
+
+    BOOL trackingMiddleButton;
+    double accumulatedMiddleDX;
+    double accumulatedMiddleDY;
+    NSUInteger ignoredSyntheticMiddleEvents;
     
     __weak TapLogger *logger;    
 }
@@ -33,5 +39,3 @@ typedef enum {
 - (void)enableTap;
 
 @end
-
-

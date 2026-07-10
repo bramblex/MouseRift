@@ -1,5 +1,6 @@
 // This file is part of Scroll Reverser <https://pilotmoon.com/scrollreverser/>
 // Licensed under Apache License v2.0 <http://www.apache.org/licenses/LICENSE-2.0>
+// Modified for MouseRift in 2026: replaced the trademarked status icon.
 
 #import "StatusItemController.h"
 
@@ -18,7 +19,7 @@
 
 + (NSImage *)statusImageWithColor:(NSColor *)color
 {
-    NSImage *const templateImage=[NSImage imageNamed:@"ScrollReverserStatusIcon"];
+    NSImage *const templateImage=[NSImage imageWithSystemSymbolName:@"computermouse" accessibilityDescription:@"MouseRift"];
     
     // create blank image to draw into
     NSImage *const statusImage=[[NSImage alloc] init];

@@ -42,13 +42,13 @@
 	<key>NSAppleScriptEnabled</key>
 	<true/>
 	<key>NSHumanReadableCopyright</key>
-	<string>© Pilotmoon Software</string>
+	<string>MouseRift contributors. Derived from Scroll Reverser, © 2011 Nicholas Moore, under Apache 2.0.</string>
 	<key>NSMainNibFile</key>
 	<string>MainMenu</string>
 	<key>NSPrincipalClass</key>
 	<string>NSApplication</string>
 	<key>OSAScriptingDefinition</key>
-	<string>ScrollReverser.sdef</string>
+	<string>MouseRift.sdef</string>
 	<key>PilotmoonReleaseChannel</key>
 	<string>$(BUILDSCRIPTS_RELEASE_CHANNEL)</string>
 	<key>PilotmoonReleaseEdition</key>
@@ -56,12 +56,10 @@
 	<key>SUAllowsAutomaticUpdates</key>
 	<false/>
 	<key>SUEnableAutomaticChecks</key>
-	<true/>
+	<false/>
 	<key>SUEnableSystemProfiling</key>
 	<false/>
 	<key>SUBundleName</key>
-	<string>Scroll Reverser</string>
-	<key>SUPublicEDKey</key>
-	<string>heX4o1mDXEKmelow1XbATuXM5amRCWGhQMFR6cnHy/k=</string>
+	<string>MouseRift</string>
 </dict>
 </plist>

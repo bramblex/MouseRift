@@ -9,7 +9,7 @@
 // https://help.apple.com/xcode/#/dev745c5c974
 
 // xcode settings
-PRODUCT_NAME = Scroll Reverser
+PRODUCT_NAME = MouseRift
 
 // custom settings
-BUILDSCRIPTS_ICON = ScrollReverser
+BUILDSCRIPTS_ICON =

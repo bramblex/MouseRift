@@ -16,9 +16,9 @@
                   <BuildableReference
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "8D1107260486CEB800E47090"
-                     BuildableName = "Scroll Reverser.app"
-                     BlueprintName = "Scroll Reverser"
-                     ReferencedContainer = "container:ScrollReverser.xcodeproj">
+                     BuildableName = "MouseRift.app"
+                     BlueprintName = "MouseRift"
+                     ReferencedContainer = "container:MouseRift.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
             </ActionContent>
@@ -35,9 +35,9 @@
                   <BuildableReference
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "8D1107260486CEB800E47090"
-                     BuildableName = "Scroll Reverser.app"
-                     BlueprintName = "Scroll Reverser"
-                     ReferencedContainer = "container:ScrollReverser.xcodeproj">
+                     BuildableName = "MouseRift.app"
+                     BlueprintName = "MouseRift"
+                     ReferencedContainer = "container:MouseRift.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
             </ActionContent>
@@ -53,9 +53,9 @@
             <BuildableReference
                BuildableIdentifier = "primary"
                BlueprintIdentifier = "8D1107260486CEB800E47090"
-               BuildableName = "Scroll Reverser.app"
-               BlueprintName = "Scroll Reverser"
-               ReferencedContainer = "container:ScrollReverser.xcodeproj">
+               BuildableName = "MouseRift.app"
+               BlueprintName = "MouseRift"
+               ReferencedContainer = "container:MouseRift.xcodeproj">
             </BuildableReference>
          </BuildActionEntry>
       </BuildActionEntries>
@@ -69,9 +69,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8D1107260486CEB800E47090"
-            BuildableName = "Scroll Reverser.app"
-            BlueprintName = "Scroll Reverser"
-            ReferencedContainer = "container:ScrollReverser.xcodeproj">
+            BuildableName = "MouseRift.app"
+            BlueprintName = "MouseRift"
+            ReferencedContainer = "container:MouseRift.xcodeproj">
          </BuildableReference>
       </MacroExpansion>
       <Testables>
@@ -92,9 +92,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8D1107260486CEB800E47090"
-            BuildableName = "Scroll Reverser.app"
-            BlueprintName = "Scroll Reverser"
-            ReferencedContainer = "container:ScrollReverser.xcodeproj">
+            BuildableName = "MouseRift.app"
+            BlueprintName = "MouseRift"
+            ReferencedContainer = "container:MouseRift.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </LaunchAction>
@@ -109,9 +109,9 @@
          <BuildableReference
             BuildableIdentifier = "primary"
             BlueprintIdentifier = "8D1107260486CEB800E47090"
-            BuildableName = "Scroll Reverser.app"
-            BlueprintName = "Scroll Reverser"
-            ReferencedContainer = "container:ScrollReverser.xcodeproj">
+            BuildableName = "MouseRift.app"
+            BlueprintName = "MouseRift"
+            ReferencedContainer = "container:MouseRift.xcodeproj">
          </BuildableReference>
       </BuildableProductRunnable>
    </ProfileAction>
@@ -132,9 +132,9 @@
                   <BuildableReference
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "8D1107260486CEB800E47090"
-                     BuildableName = "Scroll Reverser.app"
-                     BlueprintName = "Scroll Reverser"
-                     ReferencedContainer = "container:ScrollReverser.xcodeproj">
+                     BuildableName = "MouseRift.app"
+                     BlueprintName = "MouseRift"
+                     ReferencedContainer = "container:MouseRift.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
             </ActionContent>
@@ -151,9 +151,9 @@
                   <BuildableReference
                      BuildableIdentifier = "primary"
                      BlueprintIdentifier = "8D1107260486CEB800E47090"
-                     BuildableName = "Scroll Reverser.app"
-                     BlueprintName = "Scroll Reverser"
-                     ReferencedContainer = "container:ScrollReverser.xcodeproj">
+                     BuildableName = "MouseRift.app"
+                     BlueprintName = "MouseRift"
+                     ReferencedContainer = "container:MouseRift.xcodeproj">
                   </BuildableReference>
                </EnvironmentBuildable>
             </ActionContent>

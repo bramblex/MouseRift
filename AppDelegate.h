@@ -1,5 +1,6 @@
 // This file is part of Scroll Reverser <https://pilotmoon.com/scrollreverser/>
 // Licensed under Apache License v2.0 <http://www.apache.org/licenses/LICENSE-2.0>
+// Modified for MouseRift in 2026: added gesture preferences.
 
 #import <Cocoa/Cocoa.h>
 #import "StatusItemController.h"
@@ -17,6 +18,9 @@ extern NSString *const PrefsReverseMouse;
 extern NSString *const PrefsHideIcon;
 extern NSString *const PrefsDiscreteScrollStepSize;
 extern NSString *const PrefsShowDiscreteScrollOptions;
+extern NSString *const PrefsMiddleGestures;
+extern NSString *const PrefsMiddleGestureThreshold;
+extern NSString *const PrefsInvertMiddleGestureY;
 
 @interface AppDelegate : NSObject <NSApplicationDelegate, StatusItemControllerDelegate, SPUUpdaterDelegate, SPUStandardUserDriverDelegate> {
 }

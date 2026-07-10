@@ -1,33 +1,52 @@
-# Scroll Reverser
+# MouseRift
 
-Reverses the direction of scrolling on macOS, with independent settings for trackpads and mice.
+MouseRift is a macOS menu bar utility for independent mouse scrolling and
+middle-button swipe gestures.
 
-## Download
+## Features
 
-For download links and more information, visit the **[Scroll Reverser home page](https://pilotmoon.com/scrollreverser/)**.
+- Reverse an external mouse wheel without changing trackpad scrolling.
+- Distinguish smooth-scrolling mice from trackpads using multi-touch gesture
+  events and the underlying IOHID scroll event.
+- Use middle-button swipes for macOS actions:
+  - Left: move the active window left (`Fn-Control-Left`)
+  - Right: move the active window right (`Fn-Control-Right`)
+  - Up: Mission Control
+  - Down: Show Desktop (`Fn-F11`)
+- Preserve an ordinary middle click when movement stays below the gesture
+  threshold.
+- Start at login and manage Accessibility/Input Monitoring permissions from
+  the preferences window.
 
-Downloads are also available in the GitHub releases tab.
+## Building
 
-## Notes
+Clone with submodules:
 
-### Building
+```sh
+git clone --recurse-submodules git@github.com:bramblex/MouseRift.git
+```
 
-After cloning this repo, you'll need to `git submodule update --init` to check out the BuildScripts submodule.
+Open `MouseRift.xcodeproj` in Xcode. Replace the upstream signing
+certificate with your own development team before building.
 
-If you try to build fresh out of the box you will get a build error because you don't have my code signing certificate. For best results, replace my certificate with your own Developer ID certificate in the Signing & Capabilities tab of the Scroll Reverser target settings in Xcode.
+The current project requires macOS 13.5 or later.
 
-Debug builds produce an app with no app icon, named "Scroll Reverser (Dev)" and version "99999". This is the expected behaviour and the build is otherwise fully functional.
+## Permissions
 
-### How it works
+MouseRift requires both permissions below:
 
-The guts of the code is in MouseTap.m. Everything else is just user interface rigging.
+- System Settings → Privacy & Security → Accessibility
+- System Settings → Privacy & Security → Input Monitoring
 
-Scroll Reverser installs an event tap, which gives it access to event stream, including scrolling events and gesture events. The main documentation about event taps is [Quartz Event Services Reference](https://developer.apple.com/library/mac/documentation/Carbon/Reference/QuartzEventServicesRef/).
+Restart MouseRift after granting them.
 
-To distinguish between trackpad and mouse, Scroll Reverser examines gesture events to determine whether there are two or more fingers on the trackpad. If so, it assumes scrolling is coming from the trackpad. Otherwise, mouse. (There's a little more to it than that, but that is the general idea.)
+## Upstream and license
 
-### Runtime debug log
+MouseRift is a derivative of
+[Scroll Reverser](https://github.com/pilotmoon/Scroll-Reverser), copyright
+2011 Nicholas Moore, licensed under Apache License 2.0.
 
-Scroll Reverser's main event tap does not output debug info with NSLog because it would slow down event processing too much. Instead, it has some custom debug code which is more efficient to write to.
-
-To display the debug window, Option(⌥)-click the Scroll Reverser menu bar icon.
+The original `LICENSE` and `NOTICE` files are retained. Modified source files
+continue to carry the upstream license header; repository history and this
+README document the MouseRift changes. The Scroll Reverser name and icon are
+not used as MouseRift product identity.

@@ -1,5 +1,6 @@
 // This file is part of Scroll Reverser <https://pilotmoon.com/scrollreverser/>
 // Licensed under Apache License v2.0 <http://www.apache.org/licenses/LICENSE-2.0>
+// Modified for MouseRift in 2026: fixed the deferred-window timing call.
 
 #import "TestWindowController.h"
 
@@ -73,7 +74,7 @@
     [[self window] setLevel:NSFloatingWindowLevel+1];
     [[self window] center];
     [NSApp activateIgnoringOtherApps:YES];
-    dispatch_after(0.05, dispatch_get_main_queue(), ^{
+    dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(0.05*NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
         [super showWindow:sender];
     });
 }

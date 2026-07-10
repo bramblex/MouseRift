@@ -1,5 +1,6 @@
 // This file is part of Scroll Reverser <https://pilotmoon.com/scrollreverser/>
 // Licensed under Apache License v2.0 <http://www.apache.org/licenses/LICENSE-2.0>
+// Modified for MouseRift in 2026: rebranded app identity and added gesture defaults.
 
 #import "AppDelegate.h"
 #import "StatusItemController.h"
@@ -22,6 +23,9 @@ NSString *const PrefsAppcastOverrideURL=@"AppcastOverrideURL";
 NSString *const PrefsTerminatedWithPrefsWindowOpen=@"TerminatedWithPrefsWindowOpen";
 NSString *const PrefsDiscreteScrollStepSize=@"DiscreteScrollStepSize";
 NSString *const PrefsShowDiscreteScrollOptions=@"ShowDiscreteScrollOptions";
+NSString *const PrefsMiddleGestures=@"MiddleGestures";
+NSString *const PrefsMiddleGestureThreshold=@"MiddleGestureThreshold";
+NSString *const PrefsInvertMiddleGestureY=@"InvertMiddleGestureY";
 
 static void *_contextHideIcon=&_contextHideIcon;
 static void *_contextEnabled=&_contextEnabled;
@@ -60,16 +64,7 @@ static void *_contextPermissions=&_contextPermissions;
 {
     NSString *urlString=[[NSUserDefaults standardUserDefaults] stringForKey:PrefsAppcastOverrideURL];
     if (!urlString) {
-        if([self appIsProductionBuild]||[self appIsBetaBuild])
-        {
-            urlString=@"https://softwareupdate.pilotmoon.com/update/scrollreverser/";
-            if ([[NSUserDefaults standardUserDefaults] boolForKey:PrefsBetaUpdates]) {
-                urlString=[urlString stringByAppendingString:@"appcast-beta.xml"];
-            }
-            else {
-                urlString=[urlString stringByAppendingString:@"appcast.xml"];
-            }
-        }
+        urlString=@"https://localhost/";
     }
     return urlString ? urlString : @"https://localhost/";
 }
@@ -109,7 +104,7 @@ static void *_contextPermissions=&_contextPermissions;
  */
 - (void)relaunch
 {
-    [self logAppEvent:@"Scroll Reverser will relaunch"];
+    [self logAppEvent:@"MouseRift will relaunch"];
 
     NSWorkspaceOpenConfiguration *config = [[NSWorkspaceOpenConfiguration alloc] init];
     config.createsNewApplicationInstance = YES;
@@ -143,12 +138,15 @@ static void *_contextPermissions=&_contextPermissions;
     if ([self class]==[AppDelegate class])
     {
         [[NSUserDefaults standardUserDefaults] registerDefaults:@{
-            PrefsReverseScrolling: @(NO),
+            PrefsReverseScrolling: @(YES),
             PrefsReverseHorizontal: @(NO),
             PrefsReverseVertical: @(YES),
-            PrefsReverseTrackpad: @(YES),
+            PrefsReverseTrackpad: @(NO),
             PrefsReverseMouse: @(YES),
             PrefsDiscreteScrollStepSize: @(3),
+            PrefsMiddleGestures: @(YES),
+            PrefsMiddleGestureThreshold: @(80),
+            PrefsInvertMiddleGestureY: @(NO),
             LoggerMaxEntries: @(50000),
             PrefsBetaUpdates: @([self appIsBetaBuild]),
         }];
@@ -208,7 +206,7 @@ static void *_contextPermissions=&_contextPermissions;
     // For example, ⌘W to close the prefs window.
     [NSApp setMainMenu:self.theMainMenu];
 
-    // Show the welcome window if the user hasn't run Scroll Reverser before.
+    // Show the welcome window if the user hasn't run MouseRift before.
     const BOOL first=![[NSUserDefaults standardUserDefaults] boolForKey:PrefsHasRunBefore];
     [[NSUserDefaults standardUserDefaults] setBool:YES forKey:PrefsHasRunBefore];
     if(first) {
@@ -224,7 +222,7 @@ static void *_contextPermissions=&_contextPermissions;
                               forKeyPath:PermissionsManagerKeyHasAllRequiredPermissions
                                  options:NSKeyValueObservingOptionInitial
                                  context:_contextPermissions];
-    [self logAppEvent:@"Scroll Reverser started. Option-click the Scroll Reverser menu bar icon to show the debug console."];
+    [self logAppEvent:@"MouseRift started. Option-click the MouseRift menu bar icon to show the debug console."];
 
     // We don't bind `enabled` directly to prefs, because of the many dynamic interactions with the setting.
     BOOL enabledInPrefs=[[NSUserDefaults standardUserDefaults] boolForKey:PrefsReverseScrolling];
@@ -250,7 +248,7 @@ static void *_contextPermissions=&_contextPermissions;
 
 - (void)applicationWillTerminate:(NSNotification *)notification
 {
-    [self logAppEvent:@"Scroll Reverser will terminate"];
+    [self logAppEvent:@"MouseRift will terminate"];
     if (self.prefsWindowController.window.visible) {
         [[NSUserDefaults standardUserDefaults] setBool:YES forKey:PrefsTerminatedWithPrefsWindowOpen];
     }
@@ -331,7 +329,7 @@ static void *_contextPermissions=&_contextPermissions;
 {
     [self.prefsWindowController close];
     [NSApp activateIgnoringOtherApps:YES];
-    NSDictionary *dict=@{@"ApplicationName": @"Scroll Reverser"};
+    NSDictionary *dict=@{@"ApplicationName": @"MouseRift"};
     [NSApp orderFrontStandardAboutPanelWithOptions:dict];
 }
 
@@ -375,7 +373,7 @@ static void *_contextPermissions=&_contextPermissions;
         self.tap.active=state;
     }
     else {
-        [self logAppEvent:@"Cannot enable Scroll Reverser; missing required permissions"];
+        [self logAppEvent:@"Cannot enable MouseRift; missing required permissions"];
     }
 
     // in case changing active state fails, force refresh of the triggering button
@@ -430,7 +428,7 @@ static void *_contextPermissions=&_contextPermissions;
 #pragma mark App info strings
 
 - (NSString *)appName {
-    return @"Scroll Reverser";
+    return @"MouseRift";
 }
 
 - (NSString *)appVersion {
@@ -440,19 +438,19 @@ static void *_contextPermissions=&_contextPermissions;
 }
 
 - (NSString *)appCredit {
-    return @"by Nick Moore";
+    return @"MouseRift contributors · based on Scroll Reverser by Nick Moore";
 }
 
 - (NSURL *)appLink {
-    return [NSURL URLWithString:@"https://pilotmoon.com/link/scrollreverser"];
+    return [NSURL URLWithString:@"https://github.com/bramblex/MouseRift"];
 }
 
 - (NSString *)appDisplayLink {
-    return @"pilotmoon.com/scrollreverser";
+    return @"github.com/bramblex/MouseRift";
 }
 
 - (NSURL *)appPermissionsHelpLink {
-    return [NSURL URLWithString:@"https://pilotmoon.com/link/scrollreverser/help/permissions"];
+    return [NSURL URLWithString:@"https://github.com/bramblex/MouseRift#permissions"];
 }
 
 #pragma mark Other UI Strings
@@ -468,4 +466,3 @@ static void *_contextPermissions=&_contextPermissions;
 }
 
 @end
-
