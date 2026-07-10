@@ -40,11 +40,6 @@
                                         <bool key="NSValidatesImmediately" value="YES"/>
                                     </dictionary>
                                 </binding>
-                                <binding destination="-2" name="hidden" keyPath="appDelegate.permissionsManager.hasAllRequiredPermissions" id="Ny4-3O-nbY">
-                                    <dictionary key="options">
-                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                    </dictionary>
-                                </binding>
                                 <binding destination="-2" name="title" keyPath="self.menuStringReverseScrolling" id="x82-Fw-ic2"/>
                             </connections>
                         </button>
@@ -173,13 +168,6 @@
                                 <real value="3.4028234663852886e+38"/>
                                 <real value="3.4028234663852886e+38"/>
                             </customSpacing>
-                            <connections>
-                                <binding destination="-2" name="hidden" keyPath="appDelegate.permissionsManager.hasAllRequiredPermissions" id="84N-TG-uwE">
-                                    <dictionary key="options">
-                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                    </dictionary>
-                                </binding>
-                            </connections>
                         </stackView>
                         <box title="MIDDLE-BUTTON GESTURES" translatesAutoresizingMaskIntoConstraints="NO" id="MRG-box-001" userLabel="Middle Gestures Box">
                             <rect key="frame" x="-3" y="193" width="424" height="104"/>
@@ -304,13 +292,8 @@
                                 <constraint firstItem="VVp-dt-Mjr" firstAttribute="leading" secondItem="rKG-9G-Xv9" secondAttribute="leading" constant="14" id="wx4-Su-cE1"/>
                             </constraints>
                             <connections>
-                                <binding destination="-2" name="hidden" keyPath="appDelegate.permissionsManager.hasAllRequiredPermissions" id="Hx4-MQ-Um2">
-                                    <dictionary key="options">
-                                        <string key="NSValueTransformerName">NSNegateBoolean</string>
-                                    </dictionary>
-                                </binding>
                                 <binding destination="-2" name="title" keyPath="self.menuStringMouseWheelHeader" id="2tu-YA-VPD"/>
-                                <binding destination="9eJ-Lx-koC" name="hidden2" keyPath="values.ShowDiscreteScrollOptions" previousBinding="Hx4-MQ-Um2" id="EJh-xD-hqe">
+                                <binding destination="9eJ-Lx-koC" name="hidden" keyPath="values.ShowDiscreteScrollOptions" id="EJh-xD-hqe">
                                     <dictionary key="options">
                                         <integer key="NSMultipleValuesPlaceholder" value="-1"/>
                                         <integer key="NSNoSelectionPlaceholder" value="-1"/>

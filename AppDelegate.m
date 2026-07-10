@@ -26,6 +26,7 @@ NSString *const PrefsShowDiscreteScrollOptions=@"ShowDiscreteScrollOptions";
 NSString *const PrefsMiddleGestures=@"MiddleGestures";
 NSString *const PrefsMiddleGestureThreshold=@"MiddleGestureThreshold";
 NSString *const PrefsInvertMiddleGestureY=@"InvertMiddleGestureY";
+static NSString *const PrefsDidMigrateLegacySettings=@"DidMigrateLegacyScrollSettings";
 
 static void *_contextHideIcon=&_contextHideIcon;
 static void *_contextEnabled=&_contextEnabled;
@@ -43,6 +44,7 @@ static void *_contextPermissions=&_contextPermissions;
 @property TapLogger *logger;
 @property SPUUpdater *updater;
 @property SPUStandardUserDriver *updaterUserDriver;
+@property BOOL changingEnabledForPermissions;
 @end
 
 @implementation AppDelegate
@@ -133,10 +135,47 @@ static void *_contextPermissions=&_contextPermissions;
 
 #pragma mark Inits
 
++ (void)migrateLegacyPreferences
+{
+    NSUserDefaults *const defaults=[NSUserDefaults standardUserDefaults];
+    if ([defaults boolForKey:PrefsDidMigrateLegacySettings]) return;
+
+    NSString *const currentDomain=[[NSBundle mainBundle] bundleIdentifier];
+    NSMutableDictionary *current=[([defaults persistentDomainForName:currentDomain] ?: @{}) mutableCopy];
+    NSArray *const keys=@[
+        PrefsReverseScrolling,
+        PrefsReverseHorizontal,
+        PrefsReverseVertical,
+        PrefsReverseTrackpad,
+        PrefsReverseMouse,
+        PrefsDiscreteScrollStepSize,
+        PrefsShowDiscreteScrollOptions,
+        PrefsHideIcon,
+    ];
+    NSArray *const legacyDomains=@[
+        @"com.pilotmoon.scroll-reverser",
+        @"com.pilotmoon.ScrollReverser",
+        @"com.midswipe.app",
+    ];
+
+    for (NSString *domain in legacyDomains) {
+        NSDictionary *const legacy=[defaults persistentDomainForName:domain];
+        for (NSString *key in keys) {
+            id const value=legacy[key];
+            if (value && !current[key]) {
+                current[key]=value;
+                [defaults setObject:value forKey:key];
+            }
+        }
+    }
+    [defaults setBool:YES forKey:PrefsDidMigrateLegacySettings];
+}
+
 + (void)initialize
 {
     if ([self class]==[AppDelegate class])
     {
+        [self migrateLegacyPreferences];
         [[NSUserDefaults standardUserDefaults] registerDefaults:@{
             PrefsReverseScrolling: @(YES),
             PrefsReverseHorizontal: @(NO),
@@ -225,9 +264,12 @@ static void *_contextPermissions=&_contextPermissions;
     [self logAppEvent:@"MouseRift started. Option-click the MouseRift menu bar icon to show the debug console."];
 
     // We don't bind `enabled` directly to prefs, because of the many dynamic interactions with the setting.
-    BOOL enabledInPrefs=[[NSUserDefaults standardUserDefaults] boolForKey:PrefsReverseScrolling];
-    [self addObserver:self forKeyPath:@"enabled" options:NSKeyValueObservingOptionInitial context:_contextEnabled];
-    self.enabled=enabledInPrefs;
+    const BOOL enabledInPrefs=[[NSUserDefaults standardUserDefaults] boolForKey:PrefsReverseScrolling];
+    [self addObserver:self forKeyPath:@"enabled" options:0 context:_contextEnabled];
+    if (enabledInPrefs && self.permissionsManager.hasAllRequiredPermissions) {
+        self.enabled=YES;
+    }
+    self.statusController.enabled=self.enabled;
 
     if ([[NSUserDefaults standardUserDefaults] boolForKey:PrefsTerminatedWithPrefsWindowOpen]) {
         [self showPrefs:self];
@@ -351,12 +393,20 @@ static void *_contextPermissions=&_contextPermissions;
     }
     else if (context==_contextEnabled) {
         self.statusController.enabled=self.enabled;
-        [[NSUserDefaults standardUserDefaults] setBool:self.enabled forKey:PrefsReverseScrolling];
+        if (!self.changingEnabledForPermissions) {
+            [[NSUserDefaults standardUserDefaults] setBool:self.enabled forKey:PrefsReverseScrolling];
+        }
     }
     else if (context==_contextPermissions) {
+        self.changingEnabledForPermissions=YES;
         if(!self.permissionsManager.hasAllRequiredPermissions) {
             self.enabled=NO;
         }
+        else if ([[NSUserDefaults standardUserDefaults] boolForKey:PrefsReverseScrolling]) {
+            self.enabled=YES;
+        }
+        self.changingEnabledForPermissions=NO;
+        self.statusController.enabled=self.enabled;
     }
 }
 
@@ -373,6 +423,9 @@ static void *_contextPermissions=&_contextPermissions;
         self.tap.active=state;
     }
     else {
+        if (state) {
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:PrefsReverseScrolling];
+        }
         [self logAppEvent:@"Cannot enable MouseRift; missing required permissions"];
     }
 
