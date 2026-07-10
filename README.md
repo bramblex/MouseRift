@@ -24,10 +24,15 @@ Clone with submodules:
 
 ```sh
 git clone --recurse-submodules git@github.com:bramblex/MouseRift.git
+cd MouseRift
+git -c fetch.recurseSubmodules=false fetch \
+  https://github.com/pilotmoon/Scroll-Reverser.git --tags
 ```
 
-Open `MouseRift.xcodeproj` in Xcode. Replace the upstream signing
-certificate with your own development team before building.
+The upstream tags are used by the shared build scripts to generate the app
+version. Open `MouseRift.xcodeproj` in Xcode and build the `MouseRift` scheme.
+Select your own development team when producing a signed build; unsigned local
+and CI builds use an ad-hoc signature for the embedded Sparkle framework.
 
 The current project requires macOS 13.5 or later.
 

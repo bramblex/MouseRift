@@ -8,8 +8,13 @@ allowed_languages="base cs cy da de el en es fr ga he hu it ja ko nb ne nl pl pt
 # common processing
 $BuildScripts/process/remove_langs $BUILT_PRODUCTS_DIR/$UNLOCALIZED_RESOURCES_FOLDER_PATH $allowed_languages
 
-# sparkle
-signing_identity="Developer ID Application"
+# Sparkle must be re-signed after pruning. Use an ad-hoc identity for unsigned
+# local/CI builds, otherwise follow the identity selected by Xcode.
+if [[ ${CODE_SIGNING_ALLOWED:-YES} == NO ]]; then
+    signing_identity="-"
+else
+    signing_identity=${EXPANDED_CODE_SIGN_IDENTITY_NAME:-"Developer ID Application"}
+fi
 echo $allowed_languages
 $BuildScripts/process/process_sparkle2_nosb $BUILT_PRODUCTS_DIR/$FRAMEWORKS_FOLDER_PATH $allowed_languages $signing_identity
 

@@ -11,11 +11,16 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
+          fetch-depth: 0
+      - name: Fetch upstream version tags
+        run: >-
+          git -c fetch.recurseSubmodules=false fetch
+          https://github.com/pilotmoon/Scroll-Reverser.git --tags
       - name: Build MouseRift
         run: >-
           mkdir -p log && xcodebuild
           -project MouseRift.xcodeproj
           -scheme MouseRift
-          -configuration Development
+          -configuration Debug
           CODE_SIGNING_ALLOWED=NO
           build
